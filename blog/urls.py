@@ -24,8 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/posts/', include('posts.urls')),
 
-    # path('api/v1/token/', TokenObtainPairView.as_view()),
-    # path('api/v1/token/refresh/', TokenRefreshView.as_view()),
+    path('api/v1/token/', TokenObtainPairView.as_view()),
+    path('api/v1/token/refresh/', TokenRefreshView.as_view()),
     path('api/v1/users/', include('user_app.urls')),
 ]
 

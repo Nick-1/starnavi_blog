@@ -13,6 +13,7 @@ class Post(models.Model):
     created = models.DateTimeField(auto_now_add=True, verbose_name='Created')
     updated = models.DateTimeField(auto_now=True, verbose_name='Updated')
     draft = models.BooleanField(default=False, verbose_name='Draft')
+    liked_by = models.ManyToManyField(User, through='Like', related_name='likes')
 
     def __str__(self):
         return self.title
@@ -23,9 +24,7 @@ class Post(models.Model):
 
 
 class Like(models.Model):
-    user = models.ManyToManyField(User, verbose_name='User', related_name='posts_like')
-    post = models.ManyToManyField(Post, verbose_name='Post', related_name='users_like')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True, verbose_name='Created')
 
-    def __str__(self):
-        return self.user

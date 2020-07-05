@@ -9,7 +9,7 @@ class PostListSerializer(serializers.ModelSerializer):
 
 
 class PostDetailSerializer(serializers.ModelSerializer):
-    #author = serializers.HiddenField(default=serializers.CurrentUserDefault())
+    author = serializers.HiddenField(default=serializers.CurrentUserDefault())
 
     class Meta:
         model = Post
@@ -17,6 +17,8 @@ class PostDetailSerializer(serializers.ModelSerializer):
 
 
 class LikeUnlikeSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
     class Meta:
         model = Like
-        fields = '__all__'
+        fields = ['user', 'post']
