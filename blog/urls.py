@@ -26,7 +26,7 @@ urlpatterns = [
 
     # path('api/v1/token/', TokenObtainPairView.as_view()),
     # path('api/v1/token/refresh/', TokenRefreshView.as_view()),
-    path('api/vi/users/', include('user_app.urls')),
+    path('api/v1/users/', include('user_app.urls')),
 ]
 
 if settings.DEBUG:
