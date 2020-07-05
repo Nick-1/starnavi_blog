@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import generics
 
 from posts.models import Post
-from posts.serializers import PostListSerializer, PostDetailSerializer
+from posts.serializers import PostListSerializer, PostDetailSerializer, LikeUnlikeSerializer
 
 
 class PostListView(generics.ListAPIView):
@@ -17,3 +17,8 @@ class PostCreateView(generics.CreateAPIView):
 class PostDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PostDetailSerializer
     queryset = Post.objects.all()
+
+
+class LikeUnlikeView(generics.CreateAPIView):
+    serializer_class = LikeUnlikeSerializer
+

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from posts.models import Post
+from posts.models import Post, Like
 
 
 class PostListSerializer(serializers.ModelSerializer):
@@ -13,4 +13,10 @@ class PostDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
+        fields = '__all__'
+
+
+class LikeUnlikeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Like
         fields = '__all__'

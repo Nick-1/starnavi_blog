@@ -23,7 +23,8 @@ class Post(models.Model):
 
 
 class Like(models.Model):
-    user = models.ManyToManyField(Post, verbose_name='User', related_name='likes')
+    user = models.ManyToManyField(User, verbose_name='User', related_name='posts_like')
+    post = models.ManyToManyField(Post, verbose_name='Post', related_name='users_like')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Created')
 
     def __str__(self):
