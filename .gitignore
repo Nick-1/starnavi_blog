@@ -29,3 +29,5 @@ env*
 junit-report*.xml
 cobertura-coverage*.xml
 pylint*.out
+media/
+db.sqlite3

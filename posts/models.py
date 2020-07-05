@@ -7,7 +7,7 @@ User = get_user_model()
 class Post(models.Model):
     title = models.CharField(max_length=255, verbose_name='Title')
     text = models.TextField(verbose_name='Your text')
-    image = models.ImageField(verbose_name='Image', upload_to='post_images/')
+    image = models.ImageField(verbose_name='Image', upload_to='post_images/', null=True, blank=True)
     author = models.ForeignKey(User, related_name='posts', on_delete=models.CASCADE)
     publish = models.DateTimeField(default=timezone.now, verbose_name='Published')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Created')
