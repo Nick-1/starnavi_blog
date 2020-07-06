@@ -1,5 +1,12 @@
+from datetime import datetime
+
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
+from blog.settings import USER_LOGIN_URL
+from user_app.models import UserActions
+
 User = get_user_model()
 
 
@@ -26,3 +33,16 @@ class RegistrationSerializer(serializers.ModelSerializer):
         user.set_password(password)
         user.save()
         return user
+
+
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    def validate(self, attrs):
+        data = super().validate(attrs)
+        actions = UserActions.objects.get(user_id=self.user.id)
+        if actions:
+            actions.login_time = datetime.now()
+            actions.last_action = USER_LOGIN_URL
+            actions.save()
+        else:
+            UserActions(user=self.user, login_time=datetime.now(), last_action=USER_LOGIN_URL).save()
+        return data

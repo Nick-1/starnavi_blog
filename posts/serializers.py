@@ -16,9 +16,11 @@ class PostDetailSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class LikeUnlikeSerializer(serializers.ModelSerializer):
+class LikeSerializer(serializers.ModelSerializer):
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
 
     class Meta:
         model = Like
         fields = ['user', 'post']
+
+
