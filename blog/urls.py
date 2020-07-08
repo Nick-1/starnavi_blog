@@ -18,21 +18,18 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework_simplejwt.views import TokenRefreshView
-
+from api import router
+from user_app.views import LoginView, RegistrationUserView
 from blog.settings import USER_LOGIN_URL
-from user_app.views import LoginView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/v1/', include(router.urls)),
 
-    path('api/v1/posts/', include('posts.urls')),
+    path(USER_LOGIN_URL, LoginView.as_view()),
+    path(f'{USER_LOGIN_URL}refresh/', TokenRefreshView.as_view()),
 
-    path('api/v1/token/', LoginView.as_view()),
-    path('api/v1/token/refresh/', TokenRefreshView.as_view()),
-
-    path('api/v1/users/', include('user_app.urls')),
-
-    path('api/v1/analytics/', include('analytics.urls')),
+    path('api/v1/users/regiser/', RegistrationUserView.as_view())
 ]
 
 if settings.DEBUG:

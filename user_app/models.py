@@ -7,4 +7,7 @@ User = get_user_model()
 class UserActions(models.Model):
     user = models.OneToOneField(User, related_name='log_actions', on_delete=models.CASCADE)
     login_time = models.DateTimeField()
-    last_action = models.CharField(max_length=300)
+    last_action = models.DateTimeField()
+
+    def __str__(self):
+        return self.user
