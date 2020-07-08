@@ -1,5 +1,4 @@
 from django.db import models
-
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
@@ -10,4 +9,4 @@ class UserActions(models.Model):
     last_action = models.DateTimeField()
 
     def __str__(self):
-        return self.user
+        return self.user.username

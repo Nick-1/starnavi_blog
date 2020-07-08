@@ -1,18 +1,19 @@
 from django.db.models import Count
 from django.db.models.functions import TruncDay
-from datetime import datetime
+from rest_framework.permissions import IsAuthenticated
+
 from analytics.serializers import LikeListSerializer
 from posts.models import Like
 from rest_framework import viewsets
 from blog.settings import TIME_ZONE
 import pytz
 tz = pytz.timezone(TIME_ZONE)
-from dateutil.parser import parse
 
 
 class LikesCountViewSet(viewsets.ModelViewSet):
     serializer_class = LikeListSerializer
     queryset = Like.objects.all()
+    permission_classes = (IsAuthenticated, )
 
     def get_queryset(self):
         queryset = Like.objects.all()

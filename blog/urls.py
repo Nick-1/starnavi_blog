@@ -19,7 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework_simplejwt.views import TokenRefreshView
 from api import router
-from user_app.views import LoginView, RegistrationUserView
+from user_app.views import LoginView, RegistrationUserView, UserActionsView
 from blog.settings import USER_LOGIN_URL
 
 urlpatterns = [
@@ -29,7 +29,8 @@ urlpatterns = [
     path(USER_LOGIN_URL, LoginView.as_view()),
     path(f'{USER_LOGIN_URL}refresh/', TokenRefreshView.as_view()),
 
-    path('api/v1/users/regiser/', RegistrationUserView.as_view())
+    path('api/v1/users/registration/', RegistrationUserView.as_view()),
+    path('api/v1/user/actions/<int:pk>', UserActionsView.as_view())
 ]
 
 if settings.DEBUG:
