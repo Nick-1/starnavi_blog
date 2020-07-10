@@ -38,7 +38,9 @@ class RegistrationSerializer(serializers.ModelSerializer):
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
-        UserActions.objects.update_or_create(user=self.user, login_time=datetime.now(tz), last_action=datetime.now(tz))
+        UserActions.objects.update_or_create(
+            user=self.user,
+            defaults={'login_time': datetime.now(tz), 'last_action': datetime.now(tz)})
         return data
 
 
