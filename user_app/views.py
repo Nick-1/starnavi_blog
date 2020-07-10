@@ -1,6 +1,7 @@
 from rest_framework import generics
 from rest_framework_simplejwt.views import TokenViewBase
 from user_app.models import UserActions
+from user_app.permissions import CurrentUserOrAdmin
 from user_app.serializers import RegistrationSerializer, CustomTokenObtainPairSerializer, UserActionsSerializer
 
 
@@ -15,3 +16,4 @@ class LoginView(TokenViewBase):
 class UserActionsView(generics.RetrieveAPIView):
     serializer_class = UserActionsSerializer
     queryset = UserActions.objects.all()
+    permission_classes = (CurrentUserOrAdmin, )

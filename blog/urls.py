@@ -26,11 +26,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/', include(router.urls)),
 
-    path(USER_LOGIN_URL, LoginView.as_view()),
+    path(USER_LOGIN_URL, LoginView.as_view(), name='jwt-login'),
     path(f'{USER_LOGIN_URL}refresh/', TokenRefreshView.as_view()),
 
-    path('api/v1/users/registration/', RegistrationUserView.as_view()),
-    path('api/v1/user/actions/<int:pk>', UserActionsView.as_view())
+    path('api/v1/registration/', RegistrationUserView.as_view(), name='registration'),
+    path('api/v1/actions/user/<int:pk>', UserActionsView.as_view(), name='actions')
 ]
 
 if settings.DEBUG:

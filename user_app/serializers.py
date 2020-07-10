@@ -11,11 +11,11 @@ User = get_user_model()
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
-    password_replay = serializers.CharField(style={'input_type': 'password'}, write_only=True)
+    password_confirm = serializers.CharField(style={'input_type': 'password'}, write_only=True)
 
     class Meta:
         model = User
-        fields = ['email', 'username', 'password', 'password_replay']
+        fields = ['email', 'username', 'password', 'password_confirm']
         extra_kwargs = {
             'password': {'write_only': True}
         }
@@ -26,10 +26,10 @@ class RegistrationSerializer(serializers.ModelSerializer):
             username=self.validated_data['username'],
         )
         password = self.validated_data['password']
-        password_replay = self.validated_data['password_replay']
+        password_confirm = self.validated_data['password_confirm']
 
-        if password != password_replay:
-            raise serializers.ValidationError({'password': 'Password must match.'})
+        if password != password_confirm:
+            raise serializers.ValidationError({'password': 'Passwords must be the same.'})
         user.set_password(password)
         user.save()
         return user
@@ -38,13 +38,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
-        try:
-            actions = UserActions.objects.get(user_id=self.user.id)
-            actions.login_time = datetime.now(tz)
-            actions.last_action = datetime.now(tz)
-            actions.save()
-        except:
-            UserActions(user=self.user, login_time=datetime.now(tz), last_action=datetime.now()).save(tz)
+        UserActions.objects.update_or_create(user=self.user, login_time=datetime.now(tz), last_action=datetime.now(tz))
         return data
 
 

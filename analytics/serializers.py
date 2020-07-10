@@ -3,7 +3,7 @@ from posts.models import Like
 
 
 class LikeListSerializer(serializers.ModelSerializer):
-    day = serializers.DateTimeField()
+    day = serializers.DateField()
     count = serializers.IntegerField()
 
     class Meta:
