@@ -21,11 +21,7 @@ class LikesCountViewSet(viewsets.ModelViewSet):
         q_to = self.request.query_params.get('date_to', None)
         user = self.request.user
         if q_from and q_to is not None:
-            queryset = queryset\
-                .filter(user_id=user.id)\
-                .filter(created__range=[q_from, q_to])\
-                .annotate(day=TruncDay('created'))\
-                .values('day')\
-                .annotate(count=Count('id'))\
-                .values('day', 'count')
+            queryset = queryset.filter(user_id=user.id, created__range=[q_from, q_to])\
+                .annotate(day=TruncDay('created')).values('day')\
+                .annotate(count=Count('id')).values('day', 'count')
         return queryset

@@ -15,23 +15,25 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.conf import settings
-from django.conf.urls.static import static
 from rest_framework_simplejwt.views import TokenRefreshView
-from api import router
 from user_app.views import LoginView, RegistrationUserView, UserActionsView
-from blog.settings import USER_LOGIN_URL
+from rest_framework import routers
+from posts import api_views as posts_views
+from analytics import api_views as analytics_views
+from constants import API_URL, USER_LOGIN_URL, USER_REGISTRATION_URL, USER_URL
+
+router = routers.DefaultRouter()
+router.register(r'posts', posts_views.PostViewSet)
+router.register(r'like', posts_views.LikeViewSet)
+router.register(r'likescount', analytics_views.LikesCountViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/', include(router.urls)),
+    path(API_URL, include(router.urls)),
 
     path(USER_LOGIN_URL, LoginView.as_view(), name='jwt-login'),
-    path(f'{USER_LOGIN_URL}refresh/', TokenRefreshView.as_view()),
+    path(f'{USER_LOGIN_URL}refresh/', TokenRefreshView.as_view(), name='jwt-refresh'),
 
-    path('api/v1/registration/', RegistrationUserView.as_view(), name='registration'),
-    path('api/v1/actions/user/<int:pk>', UserActionsView.as_view(), name='actions')
+    path(USER_REGISTRATION_URL, RegistrationUserView.as_view(), name='registration'),
+    path(f'{USER_URL}<int:pk>/actions/', UserActionsView.as_view(), name='actions')
 ]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
