@@ -11,26 +11,36 @@
 
 **API urls:**
 ###### api/v1/user/registration/
-- POST
+- POST registration user
 
 ###### api/v1/user/login/
-- POST
+- POST login (JWT)
 
 ###### api/v1/posts/
-- GET
-- POST
+- GET all posts
+- POST create post
 
 ###### api/v1/posts/{{post_id}}
-- PATCH
-- DELETE
+- GET one post
+
+###### api/v1/posts/{{post_id}}
+- PATCH change post
+- DELETE remove post
 
 ###### api/v1/like/
-- POST
+- POST like
 
 ###### api/v1/like/{{post_id}
-- DELETE
+- DELETE unlike
 
 ###### api/v1/likescount/?date_from=**{{date}}**&date_to=**{{date}}** ex: 2020-7-10
-- GET
+- GET count and date of current user likes
+
+###### api/v1/user/{{user_id}}/actions/
+- GET gel user actions (login and last action time)
+
+**Postman collection:**
+[**Postman collection:**](https://www.getpostman.com/collections/f48922350938724534c3)
+
 
 
