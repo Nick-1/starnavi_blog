@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework_simplejwt.views import TokenRefreshView
+
+from blog.views import StartPageView
 from user_app.views import LoginView, RegistrationUserView, UserActionsView
 from rest_framework import routers
 from posts import api_views as posts_views
@@ -30,6 +32,7 @@ router.register(rf'{LIKES_COUNT_ROUT}', analytics_views.LikesCountViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', StartPageView.as_view()),
     path(API_URL, include(router.urls)),
 
     path(USER_LOGIN_URL, LoginView.as_view(), name='jwt-login'),
