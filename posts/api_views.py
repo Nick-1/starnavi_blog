@@ -20,6 +20,9 @@ class LikeViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated, IsOwnerOrReadOnly)
 
     def destroy(self, request, *args, **kwargs):
-        Like.objects.filter(user=request.user, post_id=kwargs['pk']).delete()
-        return Response(status=status.HTTP_204_NO_CONTENT,
-                        data={'message': 'object was successfully deleted'})
+        like = Like.objects.filter(user=request.user, post_id=kwargs['pk'])
+        if like:
+            like.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT, data={'message': 'object was successfully deleted'})
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={'message': 'you did not like this post'})
