@@ -11,23 +11,26 @@
 
 **API urls:**
 ###### api/v1/user/registration/
-POST
+- POST
 
 ###### api/v1/user/login/
-POST
+- POST
 
 ###### api/v1/posts/
-GET
-POST
-PATH
-DELETE
+- GET
+- POST
+
+###### api/v1/posts/{{post_id}}
+- PATCH
+- DELETE
 
 ###### api/v1/like/
-POST
-DELETE
+- POST
+
+###### api/v1/like/{{post_id}
+- DELETE
 
 ###### api/v1/likescount/?date_from=**{{date}}**&date_to=**{{date}}** ex: 2020-7-10
-POST
-DELETE
+- GET
 
 
