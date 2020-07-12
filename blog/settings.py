@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'posts',
     'user_app',
     'analytics',
+    'tests',
 ]
 
 MIDDLEWARE = [

@@ -20,12 +20,13 @@ from user_app.views import LoginView, RegistrationUserView, UserActionsView
 from rest_framework import routers
 from posts import api_views as posts_views
 from analytics import api_views as analytics_views
-from constants import API_URL, USER_LOGIN_URL, USER_REGISTRATION_URL, USER_URL
+from constants import API_URL, USER_LOGIN_URL, USER_REGISTRATION_URL, USER_URL, \
+    POST_ROUT, LIKE_ROUT, LIKES_COUNT_ROUT, ACTIONS_URL
 
 router = routers.DefaultRouter()
-router.register(r'posts', posts_views.PostViewSet)
-router.register(r'like', posts_views.LikeViewSet)
-router.register(r'likescount', analytics_views.LikesCountViewSet)
+router.register(rf'{POST_ROUT}', posts_views.PostViewSet)
+router.register(rf'{LIKE_ROUT}', posts_views.LikeViewSet)
+router.register(rf'{LIKES_COUNT_ROUT}', analytics_views.LikesCountViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -35,5 +36,5 @@ urlpatterns = [
     path(f'{USER_LOGIN_URL}refresh/', TokenRefreshView.as_view(), name='jwt-refresh'),
 
     path(USER_REGISTRATION_URL, RegistrationUserView.as_view(), name='registration'),
-    path(f'{USER_URL}<int:pk>/actions/', UserActionsView.as_view(), name='actions')
+    path(f'{USER_URL}<int:pk>/{ACTIONS_URL}/', UserActionsView.as_view(), name='actions')
 ]
