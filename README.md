@@ -8,7 +8,7 @@
 5. python manage.py migrate
 6. python manage.py runserver
 
-[**Postman collection:**](https://www.getpostman.com/collections/f48922350938724534c3)
+[**Postman collection**](https://www.getpostman.com/collections/f48922350938724534c3)
 - registration new user and login
 - add in collection variables **token**
 
