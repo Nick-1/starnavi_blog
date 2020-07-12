@@ -8,6 +8,9 @@
 5. python manage.py migrate
 6. python manage.py runserver
 
+[**Postman collection:**](https://www.getpostman.com/collections/f48922350938724534c3)
+- registration new user and login
+- add in collection variables **token**
 
 **API urls:**
 ###### api/v1/user/registration/
@@ -38,9 +41,6 @@
 
 ###### api/v1/user/{{user_id}}/actions/
 - GET gel user actions (login and last action time)
-
-**Postman collection:**
-[**Postman collection:**](https://www.getpostman.com/collections/f48922350938724534c3)
 
 
 
