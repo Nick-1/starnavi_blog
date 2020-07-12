@@ -10,7 +10,7 @@
 
 [**Postman collection:**](https://www.getpostman.com/collections/f48922350938724534c3)
 - registration new user and login
-- add in collection variables **token**:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1...
+- add in collection variables **token**
 
 **API urls:**
 ###### api/v1/user/registration/
